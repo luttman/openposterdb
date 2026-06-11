@@ -26,9 +26,19 @@ TMDB and TVDB IDs also work for episodes:
 
 The episode endpoint accepts a series-level ID combined with season/episode numbers — no episode-specific ID is needed.
 
+Season posters (a TV season's own poster art) use the `season-default` endpoint with a `season-{id}-S{season}` ID:
+
+| ID type | Season URL template |
+|---|---|
+| IMDb | `{base_url}/{api_key}/imdb/season-default/season-{imdb_id}-S{season}.jpg` |
+| TMDB | `{base_url}/{api_key}/tmdb/season-default/season-{tmdb_id}-S{season}.jpg` |
+| TVDB | `{base_url}/{api_key}/tvdb/season-default/season-{tvdb_id}-S{season}.jpg` |
+
+The ID is the **series** ID (IMDb/TMDB/TVDB) combined with the season number.
+
 ## Jellyfin
 
-OpenPosterDB has a dedicated [Jellyfin plugin](https://github.com/PNRxA/jellyfin-plugin-openposterdb) — a separate, open-source remote image provider. It fetches posters, backdrops, logos and episode stills (with rating badges) from your self-hosted instance, keyed off each item's IMDb / TMDB / TVDB id.
+OpenPosterDB has a dedicated [Jellyfin plugin](https://github.com/PNRxA/jellyfin-plugin-openposterdb) — a separate, open-source remote image provider. It fetches posters, backdrops, logos, episode stills, and season posters (with rating badges) from your self-hosted instance, keyed off each item's IMDb / TMDB / TVDB id.
 
 1. In Jellyfin, go to **Dashboard → Plugins → Repositories** and add the manifest URL:
    ```

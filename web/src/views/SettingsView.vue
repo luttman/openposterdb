@@ -133,6 +133,7 @@ async function toggleFreeApiKey() {
           :fetch-logo-preview="adminApi.previewLogo"
           :fetch-backdrop-preview="adminApi.previewBackdrop"
           :fetch-episode-preview="adminApi.previewEpisode"
+          :fetch-season-preview="adminApi.previewSeason"
         />
       </div>
     </div>

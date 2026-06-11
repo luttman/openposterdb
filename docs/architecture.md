@@ -80,6 +80,7 @@ Logos, backdrops, and episodes include a kind prefix in their cache keys to dist
 | Logo | `_l` |
 | Backdrop | `_b` |
 | Episode | `_e` |
+| Season | `_s` |
 
 ### Source variant markers
 
@@ -107,6 +108,7 @@ The `image_meta` table tracks metadata for cached images:
 | `image_type` | `l` | Logo |
 | `image_type` | `b` | Backdrop |
 | `image_type` | `e` | Episode |
+| `image_type` | `s` | Season |
 
 ### Settings short values
 
