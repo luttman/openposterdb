@@ -515,6 +515,17 @@ describe('api', () => {
     expect(options.method).toBe('POST')
   })
 
+  it('adminApi.purgeSeason encodes the id value', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(makeFetchResponse(200))
+    vi.stubGlobal('fetch', fetchMock)
+
+    await adminApi.purgeSeason('tmdb', 'season-1396-S2')
+
+    const [url, options] = fetchMock.mock.calls[0]
+    expect(url).toBe('/api/admin/seasons/tmdb/season-1396-S2')
+    expect(options.method).toBe('DELETE')
+  })
+
   it('adminApi.previewSeason calls GET with correct URL and params', async () => {
     const fetchMock = vi.fn().mockResolvedValue(makeFetchResponse(200))
     vi.stubGlobal('fetch', fetchMock)

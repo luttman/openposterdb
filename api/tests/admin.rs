@@ -662,10 +662,12 @@ async fn purge_endpoints_require_auth() {
         ("DELETE", "/api/admin/logos"),
         ("DELETE", "/api/admin/backdrops"),
         ("DELETE", "/api/admin/episodes"),
+        ("DELETE", "/api/admin/seasons"),
         ("DELETE", "/api/admin/posters/imdb/tt0111161"),
         ("DELETE", "/api/admin/logos/imdb/tt0111161"),
         ("DELETE", "/api/admin/backdrops/imdb/tt0111161"),
         ("DELETE", "/api/admin/episodes/imdb/tt0111161"),
+        ("DELETE", "/api/admin/seasons/imdb/tt0111161"),
     ];
 
     for (method, uri) in cases {
