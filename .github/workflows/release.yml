@@ -29,12 +29,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Extract metadata
         id: meta
         run: |
@@ -52,7 +46,7 @@ jobs:
           # surface as bogus `unknown/unknown` architectures.
           provenance: false
           sbom: false
-          outputs: type=image,"name=ghcr.io/${{ steps.meta.outputs.image_name }},${{ secrets.DOCKERHUB_USERNAME }}/openposterdb",push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=ghcr.io/${{ steps.meta.outputs.image_name }},push-by-digest=true,name-canonical=true,push=true
           cache-from: type=registry,ref=ghcr.io/${{ steps.meta.outputs.image_name }}-buildcache:${{ steps.meta.outputs.platform_pair }}
           cache-to: type=registry,ref=ghcr.io/${{ steps.meta.outputs.image_name }}-buildcache:${{ steps.meta.outputs.platform_pair }},compression=zstd,mode=max
 
@@ -90,12 +84,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Extract metadata
         id: meta
         run: |
@@ -117,14 +105,3 @@ jobs:
             -t "$GHCR_IMAGE:${{ steps.meta.outputs.major }}" \
             -t "$GHCR_IMAGE:latest" \
             $(for f in *; do echo "$GHCR_IMAGE@$(cat "$f")"; done)
-
-      - name: Create and push Docker Hub manifest
-        working-directory: ${{ runner.temp }}/digests
-        run: |
-          DH_IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/openposterdb"
-          docker buildx imagetools create \
-            -t "$DH_IMAGE:${{ steps.meta.outputs.tag }}" \
-            -t "$DH_IMAGE:${{ steps.meta.outputs.version }}" \
-            -t "$DH_IMAGE:${{ steps.meta.outputs.major }}" \
-            -t "$DH_IMAGE:latest" \
-            $(for f in *; do echo "$DH_IMAGE@$(cat "$f")"; done)

@@ -1,6 +1,6 @@
 services:
   openposterdb:
-    image: pnrxa/openposterdb:latest
+    image: ghcr.io/luttman/openposterdb:latest
     ports:
       - "3000:3000"
     environment:
